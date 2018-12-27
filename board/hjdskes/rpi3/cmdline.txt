@@ -1,0 +1,1 @@
+root=/dev/mmcblk0p2 rootfstype=ext4 rootwait elevator=noop quiet loglevel=3

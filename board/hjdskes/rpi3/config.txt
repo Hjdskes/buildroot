@@ -1,0 +1,4 @@
+kernel=zImage
+gpu_mem=128
+# vc4-kms-v3d gives a black screen. See https://github.com/raspberrypi/linux/pull/2693
+dtoverlay=vc4-fkms-v3d
