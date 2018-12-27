@@ -1,0 +1,56 @@
+comment "wlroots depends on udev"
+	depends on !BR2_PACKAGE_HAS_UDEV
+
+config BR2_PACKAGE_WLROOTS
+	bool "wlroots"
+	depends on BR2_PACKAGE_HAS_UDEV
+	select BR2_PACKAGE_WAYLAND
+	select BR2_PACKAGE_WAYLAND_PROTOCOLS
+	select BR2_PACKAGE_MESA3D_OPENGL_ES # GLESv2 
+	select BR2_PACKAGE_LIBDRM
+	select BR2_PACKAGE_LIBINPUT
+	select BR2_PACKAGE_LIBXKBCOMMON
+	# This is required to get wlroots-based compositors to work with keyboards.
+	select BR2_PACKAGE_XKEYBOARD_CONFIG
+	select BR2_PACKAGE_PIXMAN
+	select BR2_PACKAGE_WLROOTS_LOGIND if BR2_PACKAGE_SYSTEMD_LOGIND
+	help
+	  The modular Wayland compositor library
+
+	  https://github.com/swaywm/wlroots
+
+if BR2_PACKAGE_WLROOTS
+
+# Uses libgbm from mesa3d and requires OpenGL EGL
+comment "wlroots needs an OpenGL EGL backend provided by mesa3d"
+	depends on !BR2_PACKAGE_MESA3D_OPENGL_EGL
+
+config BR2_PACKAGE_WLROOTS_LIBCAP
+	bool "enable capability support"
+	help
+	  this enables support for rootless session via capabilities (cap_sys_admin)
+
+if BR2_PACKAGE_SYSTEMD_LOGIND
+
+config BR2_PACKAGE_WLROOTS_LOGIND
+	bool "enable logind support"
+	help 
+	  this enables support for rootless session via logind 
+
+endif
+
+# TODO: finish this
+# config BR2_PACKAGE_WLROOTS_X11
+#	bool "X11 compositor"
+#	depends on BR2_PACKAGE_XORG7
+#	select BR2_PACKAGE_LIBXCB
+#	select BR2_PACKAGE_XLIB_LIBX11
+#
+# config BR2_PACKAGE_WLROOTD_XWAYLAND
+#	bool "Xwayland support"
+#	depends on BR2_PACKAGE_XORG7
+#	depends on BR2_PACKAGE_LIBXCB
+#	select BR2_PACKAGE_XLIB_LIBX11
+#	select BR2_PACKAGE_XLIB_LIBXCURSOR
+
+endif

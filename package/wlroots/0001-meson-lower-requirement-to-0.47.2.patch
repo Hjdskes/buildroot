@@ -1,0 +1,27 @@
+From 688e78562f1e63c05f6592f29b0d849b0dbd1d50 Mon Sep 17 00:00:00 2001
+From: Jente Hidskes <hjdskes@gmail.com>
+Date: Sat, 22 Dec 2018 21:02:29 +0100
+Subject: [PATCH 1/1] meson: lower requirement to 0.47.2
+
+Buildroot does not yet package 0.48.1 because of some unresolved issues.
+See https://git.busybox.net/buildroot/commit/?id=55b5dfc1bf99999592ad074ef18f59ce92c69a76
+---
+ meson.build | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/meson.build b/meson.build
+index df1dbb84..6d780f37 100644
+--- a/meson.build
++++ b/meson.build
+@@ -3,7 +3,7 @@ project(
+ 	'c',
+ 	version: '0.2.0',
+ 	license: 'MIT',
+-	meson_version: '>=0.48.0',
++	meson_version: '>=0.47.0',
+ 	default_options: [
+ 		'c_std=c11',
+ 		'warning_level=2',
+-- 
+2.20.1
+
